@@ -1,0 +1,6 @@
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at Stack_Exchange_Voting_Utility.Controllers.AccountController.GetUserInformation(String accessToken) in C:\Projects\Stack Exchange Voting Utility\Stack Exchange Voting Utility\Controllers\AccountController.cs:line 113
+   at Stack_Exchange_Voting_Utility.Controllers.AccountController.SEOAuthConfirm(String code, String state) in C:\Projects\Stack Exchange Voting Utility\Stack Exchange Voting Utility\Controllers\AccountController.cs:line 128

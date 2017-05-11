@@ -1,0 +1,301 @@
+﻿html, body {
+    height: 100%;
+}
+
+body {
+    padding-top: 100px;
+}
+
+.main {
+    min-height: 100%;
+    padding-bottom: 70px;
+    position: relative;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+pre, code {
+    overflow: auto;
+    white-space: pre !important;
+    max-height: 500px;
+}
+
+.hidden {
+    display: none;
+}
+
+.login-form > * {
+    margin: 15px;
+}
+
+.login-form > p {
+    font-size: 18px;
+    width: 75%;
+    margin: 15px auto;
+}
+
+.nav img {
+    vertical-align: middle;
+    border-radius: 1000px;
+}
+
+.nav span {
+    color: #999;
+    display: inline-block;
+    padding: 15px 10px;
+    line-height: 20px;
+}
+
+.site {
+    width: 30%;
+    display: inline-block;
+    margin: 5px;
+    padding: 5px;
+    background-color: #efefef;
+    border: 1px solid #cfcfcf;
+    border-radius: 3px;
+}
+
+.nav-type {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 0;
+    z-index: 999;
+    background-color: #fff;
+}
+
+.post {
+    position: relative;
+    z-index: 0;
+}
+
+    .post .post-icon {
+        float: left;
+        font-size: 40px;
+        display: inline-block;
+        margin: 10px;
+        color: #444;
+    }
+
+    .post .title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .post .post-body {
+        margin-left: 84px;
+        padding: 5px;
+    }
+
+.post-info {
+    padding-top: 12px;
+    margin-left: 84px;
+    text-align: left;
+    background-color: #fff;
+    overflow: hidden;
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+
+    .post-info > a {
+        float: right;
+    }
+
+.voting-buttons {
+    text-align: center;
+    float: left;
+    padding-top: 10px;
+    width: 84px;
+    position: fixed;
+    top: 100px;
+    background-color: #fff;
+    height: 100%;
+    border-right: 1px solid #ccc;
+}
+
+    .voting-buttons > a {
+        border-radius: 1000px;
+        display: inline-block;
+        text-align: center;
+        font-size: 24px;
+        vertical-align: middle;
+        padding-top: 16px;
+        width: 64px;
+        height: 64px;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+        .voting-buttons > a:hover, .voting-buttons > a:active {
+            text-decoration: none;
+            background-color: #368aff;
+        }
+
+.vote-up {
+    background-color: #54cf2a;
+    padding-left: 4px;
+}
+
+.vote-skip {
+    padding-top: 17px !important;
+    background-color: #909090;
+}
+
+.vote-down {
+    background-color: #db2d2d;
+    padding-top: 19px !important;
+}
+
+.vote-close {
+    background-color: #ff0000;
+}
+
+footer {
+    position: fixed;
+    background-color: #fff;
+    padding: 15px;
+    border-top: 1px solid #ccc;
+    margin-top: -70px;
+    height: 70px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+    footer p {
+        margin: 0;
+    }
+
+.obscured, .obscured * {
+    transition: color linear 0.33s;
+    color: #e7e7e7;
+}
+
+    .obscured:hover, .obscured:hover * {
+        color: inherit;
+    }
+
+        .obscured .no-obs, .obscured:hover .no-obs {
+            color: #333;
+        }
+
+.show-tag {
+    color: #eb6b6b !important;
+}
+
+@media screen and (max-width: 800px) {
+    body {
+        padding-top: 50px;
+    }
+
+    pre {
+        margin: 8px;
+    }
+
+    .nav-type {
+        position: relative;
+        top: 0;
+    }
+
+    .main {
+        position: static;
+        padding-bottom: 64px;
+    }
+
+    .site {
+        width: 100%;
+    }
+
+    .voting-buttons {
+        float: initial;
+        margin: 0;
+        padding: 0;
+        padding-top: 3px;
+        display: block;
+        width: 100%;
+        height: 56px;
+        position: fixed;
+        bottom: 0px;
+        top: initial;
+        border-top: 1px solid #ccc;
+        border-right: 0;
+        z-index: 999;
+    }
+
+        .voting-buttons > a {
+            height: 48px;
+            width: 48px;
+            margin: 0 10px;
+            padding-top: 14px;
+            font-size: 16px;
+        }
+
+    .vote-up {
+        position: absolute;
+        left: 20px;
+        top: 3px;
+        padding-right: 2px;
+    }
+
+    .vote-skip {
+        padding-top: 14px !important;
+    }
+
+    .vote-down {
+        padding-top: 16px !important;
+        position: absolute;
+        right: 20px;
+        top: 3px;
+    }
+
+    .post {
+    }
+
+        .post .post-icon {
+            font-size: 26px;
+            margin: 5px;
+        }
+
+    .post-info {
+        margin-left: 0;
+        margin-right: 0;
+        left: 0;
+        right: 0;
+    }
+
+    .post-body {
+        margin: 0 !important;
+        border: none;
+    }
+
+    footer {
+        z-index: 0;
+        position: static;
+        margin: 0;
+        height: auto;
+    }
+}

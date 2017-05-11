@@ -1,0 +1,75 @@
+﻿@using Stack_Exchange_Voting_Utility.Models;
+@model ViewSiteViewModel
+@{
+    ViewBag.Title = HttpUtility.HtmlDecode(Model.Title);
+}
+
+<div class="row">
+    <ul class="nav nav-tabs nav-type">
+        <li class="disabled"><a href="#">Type:</a></li>
+        <li role="presentation" class="active">@Html.ActionLink("Questions", "ViewSite", new { site = Model.Site })</li>
+        <li role="presentation" class="disabled"><a href="#">Answers</a></li>
+        <li role="presentation" class="disabled"><a href="#">Both</a></li>
+    </ul>
+    <div class="post">
+        <div class="voting-buttons">
+            @*<span class="glyphicon glyphicon-remove vote-close" aria-hidden="true"></span>*@
+            @Html.ActionLink(" ", "Vote", new { id = Model.Id, direction = "Up", site = Model.Site }, new { @class = "glyphicon glyphicon-chevron-up vote-up" })
+            @Html.ActionLink(" ", "Vote", new { id = Model.Id, direction = "Skip", site = Model.Site }, new { @class = "glyphicon glyphicon-chevron-right vote-skip" })
+            @Html.ActionLink(" ", "Vote", new { id = Model.Id, direction = "Down", site = Model.Site }, new { @class = "glyphicon glyphicon-chevron-down vote-down" })
+        </div>
+        <div class="post-info">
+            <a href="@Model.Url" target="_blank" class="btn btn-primary right">
+                Go to post
+            </a>
+            @{
+                var css = "glyphicon glyphicon-";
+                if (Model.Type == "Question")
+                {
+                    css += "question";
+                }
+                else
+                {
+                    css += "exclamation";
+                }
+                css += "-sign";
+            }
+            <span class="@css post-icon"></span>
+            <span class="title">
+                @HttpUtility.HtmlDecode(Model.Title)
+            </span><br />
+            <span class="author hol">
+                <span class="no-obs">Author: </span>
+                <a href="@Model.AuthorUrl">@Model.Author</a>
+                <span class="show-tag no-obs hidden">[Show Author]</span>
+            </span><br />
+            @Model.Type tagged @Model.Tags<br />
+            @Model.Views views asked @Model.Created.ToString("yyyy.MM.dd HH:mm")
+        </div>
+        <div class="post-body">
+            @Html.Raw(Model.Body)
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function unhide() {
+        this.className = this.className.replace("obscured", "");
+        var items = this.getElementsByClassName("show-tag");
+        for (var i = 0; i < items.length; i++) {
+            this.removeChild(items[i]);
+        }
+    }
+
+    window.onload = function () {
+        var items = document.getElementsByClassName("hol");
+        for (var i = 0; i < items.length; i++) {
+            items[i].className += " obscured";
+            items[i].addEventListener("click", unhide);
+            var showButtons = items[i].getElementsByClassName("show-tag");
+            for (var j = 0; j < showButtons.length; j++) {
+                showButtons[j].className = showButtons[j].className.replace("hidden", "");
+            }
+        }
+    };
+</script>

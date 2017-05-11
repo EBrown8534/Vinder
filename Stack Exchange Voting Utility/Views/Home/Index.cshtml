@@ -1,0 +1,19 @@
+﻿@using Stack_Exchange_Voting_Utility.Models;
+@model IndexViewModel
+@{
+    ViewBag.Title = "Available Sites";
+}
+
+<div class="row">
+    <h1>Available Sites</h1>
+    <p>
+        If a site is not in this list, then you are not associated with it on the Stack Exchange network. In order to view a site you must be an active member of that site before attempting to use this service. We cannot associate you with a site directly (this is not a technical issue, but a usability one: when you are freshly associated with a site you do not have permission to vote completely).
+    </p>
+    @foreach (var site in Model.Sites.OrderByDescending(x => x.User.Reputation).ThenBy(x => x.Site.Name))
+    {
+        <div class="site">
+            <img src="@site.Site.IconUrl" width="32" height="32" />
+            @Html.ActionLink(HttpUtility.HtmlDecode(site.Site.Name), "ViewSite", new { site = site.Site.ApiSiteParameter }) (@site.User.Reputation rep)<br />
+        </div>
+    }
+</div>

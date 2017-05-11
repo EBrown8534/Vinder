@@ -1,0 +1,36 @@
+﻿@using Stack_Exchange_Voting_Utility.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<div class="text-center login-form">
+    <h1>Vinder</h1>
+    <h2>Stack Exchange Speed Voting</h2>
+    <a href="@Model.Url" class="btn btn-lg btn-primary">Login with Stack Exchange</a>
+    <p>
+        Stack Exchange voting taken to a whole new level.
+    </p>
+    <p>
+        Experience Vinder, the alternate site for voting on the Stack Exchange Network, where questions and answers are presented to you in a form designed efficiently for voting. Vinder allows you to make quick decisions on what content is worthy of an upvote or downvote, and allows you to skip content altogether!
+    </p>
+    <p>
+        <strong>Votes are kept anonymous.</strong> Just like Stack Exchange, votes on Vinder are not public. We don't keep any of your votes recorded, so they are not even visible to those with access to the Vinder database itself.
+    </p>
+    <p>
+        If you are like myself and have trouble locating content that you think deserves your votes, then Vinder is perfect for you!
+    </p>
+    <p>
+        By providing a concise, simple layout and design to eliminate the majority of the features of Stack Exchange, Vinder makes it easy to judge <strong>content by the content</strong>, and not by the person writing it. Whether that be the person's name, reputation, or picture, these are <strong>all removed</strong><sup>1</sup> from the view.
+    </p>
+    <p>
+        Get started today and <a href="@Model.Url">login with your Stack Exchange account</a>!
+    </p>
+    <p>
+        1: The only 'identifiable' information made visible is the author name due to requirements by Stack Exchange, though we do our best to keep it as discreet as possible, while attempting to not violate the Stack Exchange Terms of Service.
+    </p>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
