@@ -9,5 +9,5 @@ The only caveat to this style of voting technique, is that Stack Exchange requir
 
 ## Dependencies
 
-This project depends on the [Evbpc.Framework](https://github.com/EBrown8534/Framework/tree/master/Evbpc.Framework) project from the [Framework repository by EBrown](https://github.com/EBrown8534/Framework).
+This project depends on the [Evbpc.Framework](https://github.com/EBrown8534/Framework/tree/master/Evbpc.Framework) project from the [Framework repository by EBrown8534](https://github.com/EBrown8534/Framework).
 
