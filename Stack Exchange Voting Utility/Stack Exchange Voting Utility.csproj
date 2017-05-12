@@ -291,6 +291,12 @@
       <DependentUpon>201705070122488_DateTimeToDateTime2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Evbpc.Framework\Evbpc.Framework\Evbpc.Framework.csproj">
+      <Project>{91b3b072-1736-4684-853b-a9682b06c8b6}</Project>
+      <Name>Evbpc.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
