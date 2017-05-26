@@ -1,2 +1,60 @@
 ﻿body {
+    background-color: #202020;
+    color: #eee;
+}
+
+.nav-type {
+    background-color: #333;
+    border-color: #111 ;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover {
+    background-color: #202020;
+    color: #777;
+    border-color: #111 #111 transparent #111;
+}
+
+.nav-tabs > li > a:hover {
+    border-color: #444;
+}
+
+.post-info {
+    background-color: #202020;
+    border-bottom-color: #111;
+}
+
+.voting-buttons {
+    background-color: #202020;
+    border-right-color: #111;
+}
+
+pre, code {
+    background-color: #333;
+    border-color: #111;
+}
+
+pre {
+    color: #eee;
+}
+
+footer {
+    background-color: #202020;
+    border-top-color: #111;
+}
+
+.obscured, .obscured * {
+    color: #2e2e2e;
+}
+
+    .obscured:hover, .obscured:hover * {
+        color: inherit;
+    }
+
+        .obscured .no-obs, .obscured:hover .no-obs {
+            color: #eee;
+        }
+
+.site {
+    background-color: #333;
+    border: 1px solid #111;
 }
