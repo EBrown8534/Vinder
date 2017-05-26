@@ -16,6 +16,7 @@ namespace Stack_Exchange_Voting_Utility.Models
         public string DisplayName { get; set; }
         public long Reputation { get; set; }
         public string AvatarUrl { get; set; }
+        public SelectedTheme Theme { get; set; } = SelectedTheme.Light;
 
         public int Upvotes { get; set; }
         public int Skips { get; set; }

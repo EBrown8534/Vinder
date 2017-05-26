@@ -200,10 +200,15 @@
     <Compile Include="Migrations\201705070122488_DateTimeToDateTime2.Designer.cs">
       <DependentUpon>201705070122488_DateTimeToDateTime2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705261123342_SetupForTheme.cs" />
+    <Compile Include="Migrations\201705261123342_SetupForTheme.Designer.cs">
+      <DependentUpon>201705261123342_SetupForTheme.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\HomeViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\SelectedTheme.cs" />
     <Compile Include="Models\SiteLink.cs" />
     <Compile Include="Models\UserQuestionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,6 +218,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.dark.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -289,6 +295,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705070122488_DateTimeToDateTime2.resx">
       <DependentUpon>201705070122488_DateTimeToDateTime2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705261123342_SetupForTheme.resx">
+      <DependentUpon>201705261123342_SetupForTheme.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

@@ -220,5 +220,17 @@ namespace Stack_Exchange_Voting_Utility.Controllers
 
             return RedirectToAction("ViewSite", new { site = site });
         }
+
+        public ActionResult ToggleTheme()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var user = db.Users.Find(User.Identity.GetUserId());
+                user.Theme = (SelectedTheme)(1 - (int)user.Theme);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

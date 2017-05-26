@@ -96,7 +96,7 @@ namespace Stack_Exchange_Voting_Utility.Controllers
 
             var myUsers = handler.ProcessResponse<Evbpc.Framework.Integrations.StackExchange.API.Models.NetworkUser>(response).Items;
 
-            var meRequest = new Evbpc.Framework.Integrations.StackExchange.API.Requests.MeRequest() { Site = myUsers[0].SiteUrl.Substring(7) };
+            var meRequest = new Evbpc.Framework.Integrations.StackExchange.API.Requests.MeRequest() { Site = new Uri(myUsers[0].SiteUrl).Host };
             var user = handler.ProcessResponse<Evbpc.Framework.Integrations.StackExchange.API.Models.User>(handler.SubmitRequest(meRequest)).Items[0];
             user.Reputation = myUsers.Sum(x => x.Reputation);
 
