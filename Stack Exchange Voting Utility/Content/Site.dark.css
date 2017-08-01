@@ -28,6 +28,33 @@
     border-right-color: #111;
 }
 
+    .voting-buttons > a {
+        color: #202020;
+    }
+
+        .voting-buttons > a:hover, .voting-buttons > a:active {
+            background-color: #215fb6;
+        }
+
+.vote-up {
+    background-color: #339313;
+    padding-left: 4px;
+}
+
+.vote-skip {
+    padding-top: 17px !important;
+    background-color: #7d7d7d;
+}
+
+.vote-down {
+    background-color: #942e2e;
+    padding-top: 19px !important;
+}
+
+.vote-close {
+    background-color: #ff0000;
+}
+
 pre, code {
     background-color: #333;
     border-color: #111;
@@ -57,4 +84,10 @@ footer {
 .site {
     background-color: #333;
     border: 1px solid #111;
+}
+
+@media screen and (max-width: 800px) {
+    .voting-buttons {
+        border-top-color: #111;
+    }
 }
