@@ -19,8 +19,12 @@ namespace Stack_Exchange_Voting_Utility
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        protected void Application_Error(object sender, EventArgs e) =>
+        protected void Application_Error(object sender, EventArgs e)
+        {
             LogError(Server.GetLastError(), Request);
+            Server.ClearError();
+            Response.Redirect("/Account/Login");
+        }
 
         internal static void LogError(Exception e, HttpRequest request)
         {

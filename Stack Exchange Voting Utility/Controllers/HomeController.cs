@@ -8,6 +8,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SEAPI = Evbpc.Framework.Integrations.StackExchange.API;
+using System.IO;
+using Evbpc.Framework.Utilities.Serialization;
+using System.Text.RegularExpressions;
 
 namespace Stack_Exchange_Voting_Utility.Controllers
 {
@@ -164,11 +167,22 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                             if (!result.Items[0].Upvoted.Value)
                             {
                                 // Failure, they either cannot upvote (15 rep?) or they are at their vote limit (40)
-                                return RedirectToAction("Login", "Account");
+                                return RedirectToAction("OutOfVotes");
                             }
                         }
-                        catch (WebException)
+                        catch (WebException e)
                         {
+                            using (var sr = new StreamReader(e.Response.GetResponseStream()))
+                            {
+                                var response = sr.ReadToEnd();
+                                var result = DataContractJsonSerialization.Deserialize<SEAPI.Models.Error>(response);
+
+                                // Failure to cast up-vote
+                                if (result.ErrorId == 407)
+                                {
+                                    return RedirectToAction("OutOfVotes", new { message = result.ErrorMessage, name = result.ErrorName, id = result.ErrorId });
+                                }
+                            }
                             // TODO: replace this with an attempt to reauthenticate through OAuth, the majority of the times this gets hit seem to be issues with the access_token needing to be revalidated
                             return RedirectToAction("Login", "Account");
                         }
@@ -194,11 +208,22 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                             if (!result.Items[0].Downvoted.Value)
                             {
                                 // Failure, they either don't have 125 rep or they are at their vote limit (40)
-                                return RedirectToAction("Login", "Account");
+                                return RedirectToAction("OutOfVotes");
                             }
                         }
-                        catch (WebException)
+                        catch (WebException e)
                         {
+                            using (var sr = new StreamReader(e.Response.GetResponseStream()))
+                            {
+                                var response = sr.ReadToEnd();
+                                var result = DataContractJsonSerialization.Deserialize<SEAPI.Models.Error>(response);
+
+                                // Failure to cast up-vote
+                                if (result.ErrorId == 407)
+                                {
+                                    return RedirectToAction("OutOfVotes", new { message = result.ErrorMessage, name = result.ErrorName, id = result.ErrorId });
+                                }
+                            }
                             // TODO: replace this with an attempt to reauthenticate through OAuth, the majority of the times this gets hit seem to be issues with the access_token needing to be revalidated
                             return RedirectToAction("Login", "Account");
                         }
@@ -226,5 +251,8 @@ namespace Stack_Exchange_Voting_Utility.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult OutOfVotes(string message) =>
+            View((object)message);
     }
 }

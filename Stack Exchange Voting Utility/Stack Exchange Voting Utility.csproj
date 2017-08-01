@@ -260,6 +260,7 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\OutOfVotes.cshtml" />
     <None Include="Views\Web.config.sample" />
     <None Include="Web.config.sample" />
     <None Include="Web.config.Debug.sample">

@@ -1,0 +1,30 @@
+﻿@model string
+@{
+    ViewBag.Title = "OutOfVotes";
+}
+
+<div class="row">
+    @if (!Model.Contains("limit reached"))
+    {
+        <h1>It looks like you don't have permission to vote</h1>
+        <p>
+            Uh-oh. You tried to cast a vote but it didn't take.
+        </p>
+        <p>
+            @Model
+        </p>
+    }
+    else
+    {
+        <h1>You're out of votes</h1>
+        <p>
+            Congratulations! You've used all of your votes!
+        </p>
+        <p>
+            @Model
+        </p>
+        <p>
+            You should wait until your vote limit is reset, or visit the @Html.ActionLink("Site List", "Index") and select a new site to vote at.
+        </p>
+    }
+</div>
