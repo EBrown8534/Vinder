@@ -113,21 +113,23 @@ namespace Stack_Exchange_Voting_Utility.Controllers
         {
             foreach (var question in questions)
             {
-                if (!(question.Upvoted ?? false)
-                    && !(question.Downvoted ?? false)
-                    && question.Score <= 5
-                    && question.CloseVoteCount == 0
-                    && !question.ClosedDateTime.HasValue
-                    && !db.UserQuestions.Any(x => x.UserId == user.Id && x.QuestionId == question.QuestionId && x.Site == site)
-                    && question.Owner.Reputation <= 1000)
+                if (!db.UserQuestions.Any(x => x.UserId == user.Id && x.QuestionId == question.QuestionId && x.Site == site))
                 {
-                    return question;
-                }
-                else if ((question.Upvoted == true || question.Downvoted == true) && question.QuestionId.HasValue)
-                {
-                    // Track it in *our* DB so we don't waste time checking it against the SE API ever again.
-                    db.UserQuestions.Add(new UserQuestionModel { Action = "Seen", QuestionId = question.QuestionId.Value, Site = site, UserId = user.Id });
-                    db.SaveChanges();
+                    if (!(question.Upvoted ?? false)
+                        && !(question.Downvoted ?? false)
+                        && question.Score <= 5
+                        && question.CloseVoteCount == 0
+                        && !question.ClosedDateTime.HasValue
+                        && question.Owner.Reputation <= 1000)
+                    {
+                        return question;
+                    }
+                    else if ((question.Upvoted == true || question.Downvoted == true) && question.QuestionId.HasValue)
+                    {
+                        // Track it in *our* DB so we don't waste time checking it against the SE API ever again.
+                        db.UserQuestions.Add(new UserQuestionModel { Action = "Seen", QuestionId = question.QuestionId.Value, Site = site, UserId = user.Id });
+                        db.SaveChanges();
+                    }
                 }
             }
 
