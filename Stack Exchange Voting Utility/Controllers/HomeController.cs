@@ -14,7 +14,7 @@ namespace Stack_Exchange_Voting_Utility.Controllers
     public class HomeController : Controller
     {
         // Created on the SE API, should be permanent. This gives us some of the question properties that we don't get by default
-        private string MainFilter = "!-MQ9xUObbPS8*asEAUIYfIkR2byR3b*M5";
+        private string _mainFilter = "!-MQ9xUObbPS8*asEAUIYfIkR2byR3b*M5";
 
         public ActionResult Index()
         {
@@ -28,9 +28,10 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                     return View(new IndexViewModel(users));
                 }
             }
-            catch
+            catch (Exception e)
             {
                 // Possibly attempt to reauthenticate here
+                MvcApplication.LogError(e, Request);
                 return RedirectToAction("Login", "Account");
             }
         }
@@ -49,7 +50,7 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                     {
                         var questions = GetQuestions(site, user.AccessToken);
                         SEAPI.Models.Question question = null;
-                        int page = 1;
+                        var page = 1;
 
                         while (question == null)
                         {
@@ -62,6 +63,12 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                     }
                     catch (WebException)
                     {
+                        // TODO: replace this with an attempt to reauthenticate through OAuth, the majority of the times this gets hit seem to be issues with the access_token needing to be revalidated
+                        return RedirectToAction("Login", "Account");
+                    }
+                    catch (Exception e)
+                    {
+                        MvcApplication.LogError(e, Request);
                         // TODO: replace this with an attempt to reauthenticate through OAuth, the majority of the times this gets hit seem to be issues with the access_token needing to be revalidated
                         return RedirectToAction("Login", "Account");
                     }
@@ -133,7 +140,7 @@ namespace Stack_Exchange_Voting_Utility.Controllers
             var config = new SEAPI.Configuration() { AccessToken = accessToken, Key = apiConfig.Key };
             var request = new SEAPI.Requests.QuestionsRequest()
             {
-                Filter = MainFilter,
+                Filter = _mainFilter,
                 Order = SEAPI.OrderType.Descending,
                 Site = site,
                 Sort = SEAPI.Requests.QuestionsRequest.SortType.Creation,
@@ -160,7 +167,7 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                         {
                             var apiConfig = StackExchangeApiConfiguration.Load();
                             var config = new SEAPI.Configuration() { AccessToken = user.AccessToken, Key = apiConfig.Key };
-                            var request = new SEAPI.Requests.VoteRequest { Filter = MainFilter, Id = id, Site = site, VoteAction = SEAPI.Requests.VoteRequest.VoteType.Upvote, Key = apiConfig.Key, AccessToken = user.AccessToken };
+                            var request = new SEAPI.Requests.VoteRequest { Filter = _mainFilter, Id = id, Site = site, VoteAction = SEAPI.Requests.VoteRequest.VoteType.Upvote, Key = apiConfig.Key, AccessToken = user.AccessToken };
                             var handler = new SEAPI.Handler(config);
                             var result = handler.ProcessResponse<SEAPI.Models.Question>(handler.SubmitRequest(request));
 
@@ -190,7 +197,7 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                         {
                             var apiConfig = StackExchangeApiConfiguration.Load();
                             var config = new SEAPI.Configuration() { AccessToken = user.AccessToken, Key = apiConfig.Key };
-                            var request = new SEAPI.Requests.VoteRequest { Filter = MainFilter, Id = id, Site = site, VoteAction = SEAPI.Requests.VoteRequest.VoteType.Downvote, Key = apiConfig.Key, AccessToken = user.AccessToken };
+                            var request = new SEAPI.Requests.VoteRequest { Filter = _mainFilter, Id = id, Site = site, VoteAction = SEAPI.Requests.VoteRequest.VoteType.Downvote, Key = apiConfig.Key, AccessToken = user.AccessToken };
                             var handler = new SEAPI.Handler(config);
                             var result = handler.ProcessResponse<SEAPI.Models.Question>(handler.SubmitRequest(request));
 
@@ -207,6 +214,10 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                         {
                             // TODO: replace this with an attempt to reauthenticate through OAuth, the majority of the times this gets hit seem to be issues with the access_token needing to be revalidated
                             return RedirectToAction("Login", "Account");
+                        }
+                        catch (Exception e)
+                        {
+                            MvcApplication.LogError(e, Request);
                         }
                         break;
                 }

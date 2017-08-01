@@ -38,10 +38,8 @@ namespace Stack_Exchange_Voting_Utility.Models
         {
         }
 
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
+        public static ApplicationDbContext Create() =>
+            new ApplicationDbContext();
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -50,5 +48,6 @@ namespace Stack_Exchange_Voting_Utility.Models
         }
 
         public DbSet<UserQuestionModel> UserQuestions { get; set; }
+        public DbSet<ErrorLog> ErrorLog { get; set; }
     }
 }
