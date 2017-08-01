@@ -18,21 +18,12 @@ namespace Stack_Exchange_Voting_Utility.Controllers
 
         public ActionResult Index()
         {
-            try
+            using (var db = new ApplicationDbContext())
             {
-                using (var db = new ApplicationDbContext())
-                {
-                    var user = db.Users.Find(User.Identity.GetUserId());
-                    var users = GetAssociatedSites(user);
+                var user = db.Users.Find(User.Identity.GetUserId());
+                var users = GetAssociatedSites(user);
 
-                    return View(new IndexViewModel(users));
-                }
-            }
-            catch (Exception e)
-            {
-                // Possibly attempt to reauthenticate here
-                MvcApplication.LogError(e, Request);
-                return RedirectToAction("Login", "Account");
+                return View(new IndexViewModel(users));
             }
         }
 
@@ -63,12 +54,6 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                     }
                     catch (WebException)
                     {
-                        // TODO: replace this with an attempt to reauthenticate through OAuth, the majority of the times this gets hit seem to be issues with the access_token needing to be revalidated
-                        return RedirectToAction("Login", "Account");
-                    }
-                    catch (Exception e)
-                    {
-                        MvcApplication.LogError(e, Request);
                         // TODO: replace this with an attempt to reauthenticate through OAuth, the majority of the times this gets hit seem to be issues with the access_token needing to be revalidated
                         return RedirectToAction("Login", "Account");
                     }
@@ -216,10 +201,6 @@ namespace Stack_Exchange_Voting_Utility.Controllers
                         {
                             // TODO: replace this with an attempt to reauthenticate through OAuth, the majority of the times this gets hit seem to be issues with the access_token needing to be revalidated
                             return RedirectToAction("Login", "Account");
-                        }
-                        catch (Exception e)
-                        {
-                            MvcApplication.LogError(e, Request);
                         }
                         break;
                 }
